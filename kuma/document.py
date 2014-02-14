@@ -16,7 +16,7 @@ class Document(object):
 
     @property
     def url(self):
-        return os.path.join(self.client.base_url, self.endoint)
+        return os.path.join(self.client.base_url, self.endpoint)
 
     @property
     def raw(self):
