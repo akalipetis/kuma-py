@@ -36,19 +36,22 @@ class Document(object):
 
     def section(self, section_id):
         pass
+    
+    def _get_meta(self, meta):
+        url = '%s$%s' % (self.url, meta)
+        return requests.get(url)
 
     def toc(self):
-        pass
+        response = self._get_meta('toc')
+        return response.test
 
     def json(self):
-        url = '%s$%s' % (self.url, 'json')
-        print url
-        response = requests.get(url)
-        print response
+        response = self._get_meta('json')
         return response.json()
 
     def children(self):
-        pass
+        response = self._get_meta('children')
+        return response.json()
 
     def html(self):
         pass
