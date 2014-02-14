@@ -41,7 +41,14 @@ class Document(object):
         pass
 
     def json(self):
-        pass
+        url = '%s$%s' % (self.url, 'json')
+        print url
+        response = requests.get(url)
+        print response
+        return response.json()
 
     def children(self):
+        pass
+
+    def html(self):
         pass
