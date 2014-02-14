@@ -1,6 +1,6 @@
 import os
-import requests
 
+from . import Document
 
 class Client(object):
     def __init__(self, host='https://developer.mozilla.org', locale='en-US'):
