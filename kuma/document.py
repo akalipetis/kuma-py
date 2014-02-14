@@ -1,3 +1,5 @@
+import os
+
 import requests
 
 class Document(object):
@@ -5,6 +7,16 @@ class Document(object):
     def __init__(self, client, endpoint):
         self.client = client
         self.endpoint = endpoint
+
+    def __getattr__(self, name):
+        return Document(self.client, os.path.join(self.endpoint, name))
+
+    def __str__(self):
+        return 'Kuma Document: %s' % self.url
+
+    @property
+    def url(self):
+        return os.path.join(self.client.base_url, self.endoint)
 
     @property
     def raw(self):
