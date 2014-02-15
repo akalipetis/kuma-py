@@ -6,10 +6,20 @@
 Welcome to kuma-py's documentation!
 ===================================
 
-Contents:
+This is the documentation for kuma-py, a Python wrapper, for the Kuma
+software —built by Mozilla— that empowers also the Mozilla Developer Network.
+kuma-py lets you easily traverse the Mozilla Developer Network (and any other
+kuma-powered website), thus it serves as a gateway to access knowledge and
+make the world better.
+
+Classes:
 
 .. toctree::
-   :maxdepth: 2
+     :maxdepth: 2
+     :glob:
+
+     client
+     document
 
 
 

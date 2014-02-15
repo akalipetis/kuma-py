@@ -50,7 +50,8 @@ class Client(object):
         """
         Returns a specific resource on the current kuma host. Can accept
         queries so as to return raw html, specific sections, children pages,
-        return the page in JSON format etc.
+        return the page in JSON format etc. This method returns either string
+        or dict, according to the response's content-type header.
         """
         url = os.path.join(self.base_url, endpoint)
 
