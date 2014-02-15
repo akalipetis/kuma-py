@@ -7,9 +7,7 @@ Python wrapper for Kuma; the Django app behind MDN
     import kuma
     
     client = kuma.Client()
-    web_api = kuma.client.docs.web.api
+    web_api = client.docs.web.api
     
-    print web_api.window.summary
-    
-    for child in web_api.children()['subpages']:
-        print child['title']
+    for page in web_api.subpages:
+        print '%s\n%s\n' % (page, page.summary)
