@@ -1,10 +1,6 @@
 import os
 
-import requests
-
 class Document(object):
-
-    _dict_cache = None
 
     def __init__(self, client, endpoint):
         self.client = client
@@ -19,13 +15,13 @@ class Document(object):
     def __str__(self):
         return 'Kuma Document: %s' % self.url
 
-    @property
-    def url(self):
-        return os.path.join(self.client.base_url, self.endpoint)
+    def get(self, query=None, meta=None):
+        return self.client.get(self.endpoint, query=query, meta=meta)
 
     @property
     def raw(self):
-        pass
+        response = self.get(query='raw')
+        return response
 
     @property
     def summary(self):
@@ -34,23 +30,17 @@ class Document(object):
     def section(self, section_id):
         pass
     
-    def _get_meta(self, meta):
-        url = '%s$%s' % (self.url, meta)
-        return requests.get(url)
-
     def toc(self):
-        response = self._get_meta('toc')
-        return response.text
+        response = self.get(meta='toc')
+        return response
 
-    def json(self, no_cache=False):
-        if (not self._dict_cache or no_cache):
-            response = self._get_meta('json')
-            self._dict_cache = response.json()
-        return self._dict_cache
+    def json(self):
+        response = self.get(meta='json')
+        return response
 
     def children(self):
-        response = self._get_meta('children')
-        return response.json()
+        response = self.get(meta='children')
+        return response
 
     def html(self):
-        return requests.get(self.url).text
+        return self.get()
