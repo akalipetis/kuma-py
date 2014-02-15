@@ -22,8 +22,13 @@ class Client(object):
         Initializes the kuma.Client by settings up the host, locale and
         document attributes.
         """
+
         self.host = host
+        """The kuma host to connect."""
+
         self.locale = locale
+        """The locale to use."""
+
         self.document = Document(self, '')
 
     @property
