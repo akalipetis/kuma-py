@@ -12,8 +12,12 @@ class Document(object):
     def __getattr__(self, name):
         return self.get_child(name)
 
+    def __unicode__(self):
+        url = os.path.join(self.client.base_url, self.endpoint)
+        return 'Kuma document at %s' % url
+
     def __str__(self):
-        return 'Kuma Document: %s' % self.url
+        return self.__unicode__()
 
     def get(self, query=None, meta=None):
         return self.client.get(self.endpoint, query=query, meta=meta)
@@ -54,3 +58,12 @@ class Document(object):
 
     def html(self):
         return self.get()
+
+    @property
+    def subpages(self):
+        # TODO: Lazify this
+        subpage_list = self.children()['subpages']
+        pages = []
+        for subpage in subpage_list:
+            pages.append(self.get_child(subpage['title']))
+        return pages
