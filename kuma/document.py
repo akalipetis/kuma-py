@@ -27,8 +27,18 @@ class Document(object):
     def summary(self):
         return self.json()['summary']
 
-    def section(self, section_id):
-        pass
+    def section(self, section_id, raw=True, macros=True):
+        section = 'section=%s' % section_id
+        query = [section]
+
+        if (raw):
+            query.append('raw')
+
+        if (macros):
+            query.append('macros')
+
+        response = self.get(query=query)
+        return response
     
     def toc(self):
         response = self.get(meta='toc')
